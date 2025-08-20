@@ -3,116 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Proxy | By SawaDream</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Universal Proxy Service</title>
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #d1d5db;
+            --background: #f9fafb;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
             background: var(--background);
+            min-height: 100vh;
             padding: 2rem 1rem;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             background: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 2rem;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: linear-gradient(90deg, var(--primary) 0%, #8b5cf6 100%);
-        }
-
-        .logo {
+        .header {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .logo h1 {
-            color: #1e293b;
-            font-size: 2.2rem;
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
-        .logo .icon {
-            color: var(--primary);
-            animation: float 3s ease-in-out infinite;
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         .form-group {
-            margin-bottom: 2rem;
-            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
         }
 
         .input-field {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease;
         }
 
         .input-field:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .submit-btn {
             background: var(--primary);
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 0.75rem;
+            border-radius: 6px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease;
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
         .submit-btn:hover {
             background: var(--primary-hover);
-            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
         }
 
         .result-box {
-            margin-top: 2rem;
-            background: #f8fafc;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
+            margin-top: 1.5rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
             display: none;
         }
 
@@ -120,17 +118,24 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .result-header h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
         }
 
         .copy-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease;
         }
 
         .copy-btn:hover {
@@ -140,29 +145,41 @@
         .generated-link {
             word-break: break-all;
             background: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            color: var(--text-primary);
         }
 
         .loading {
             display: none;
             text-align: center;
             margin: 1rem 0;
-            color: var(--primary);
+            color: var(--text-secondary);
         }
 
-        .loading i {
-            animation: spin 1s linear infinite;
+        .info-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .info-section h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .info-item {
+            padding: 0.75rem;
+            background: var(--background);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         @media (max-width: 640px) {
@@ -178,61 +195,59 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <h1>
-                <i class="fas fa-bolt icon"></i>
-                Universal Proxy
-            </h1>
-            <p>安全稳定的全球URL反代加速服务</p>
+        <div class="header">
+            <h1>Universal Proxy Service</h1>
+            <p>安全可靠的网络代理服务</p>
         </div>
 
         <form id="proxyForm">
             <div class="form-group">
+                <label for="targetUrl" class="form-label">目标URL</label>
                 <input 
                     type="url" 
                     id="targetUrl"
                     class="input-field"
-                    placeholder="请输入需要加速的完整URL"
+                    placeholder="https://example.com"
                     required
                 >
             </div>
             
-            <button type="submit" class="submit-btn">
-                <i class="fas fa-rocket"></i>
-                生成加速链接
+            <button type="submit" class="submit-btn" id="submitBtn">
+                生成代理链接
             </button>
         </form>
 
         <div class="loading">
-            <i class="fas fa-spinner fa-2x"></i>
+            正在生成链接...
         </div>
 
         <div class="result-box">
             <div class="result-header">
-                <h3>您的加速链接：</h3>
+                <h3>代理链接</h3>
                 <button class="copy-btn" onclick="copyLink()">
-                    <i class="far fa-copy"></i>
                     复制
                 </button>
             </div>
             <div class="generated-link" id="resultLink"></div>
         </div>
 
-        <div class="tips" style="margin-top: 2rem; color: #64748b;">
-            <h3 style="margin-bottom: 1rem;">使用指南：</h3>
-            <div style="display: grid; gap: 1rem;">
-                <div style="padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
-                    <i class="fas fa-link"></i> 直接输入需要加速的URL地址即可生成专属加速链接
-                </div>
-                <div style="padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
-                    <i class="fas fa-shield-alt"></i> 支持HTTPS安全传输，全程数据加密
-                </div>
+        <div class="info-section">
+            <h3>使用说明</h3>
+            <div class="info-item">
+                输入完整的URL地址，系统将生成对应的代理链接
+            </div>
+            <div class="info-item">
+                支持HTTP和HTTPS协议，确保数据传输安全
+            </div>
+            <div class="info-item">
+                代理服务会自动处理页面资源的相对路径问题
             </div>
         </div>
     </div>
 
     <script>
         const form = document.getElementById('proxyForm')
+        const submitBtn = document.getElementById('submitBtn')
         const loading = document.querySelector('.loading')
         const resultBox = document.querySelector('.result-box')
         const resultLink = document.getElementById('resultLink')
@@ -240,41 +255,70 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
             const input = document.getElementById('targetUrl')
+            const url = input.value.trim()
+            
+            if (!url) return
             
             try {
                 // 显示加载状态
+                submitBtn.disabled = true
+                submitBtn.textContent = '生成中...'
                 loading.style.display = 'block'
                 resultBox.style.display = 'none'
 
                 // 构造代理URL
-                const encoded = encodeURIComponent(input.value.trim())
-                const proxyUrl = `${window.location.origin}/proxy/${encoded}`
+                const encoded = encodeURIComponent(url)
+                const proxyUrl = `${window.location.origin}/.netlify/functions/proxy/${encoded}`
 
                 // 显示结果
                 resultLink.textContent = proxyUrl
                 resultBox.style.display = 'block'
                 loading.style.display = 'none'
+                
+                // 重置按钮
+                submitBtn.disabled = false
+                submitBtn.textContent = '生成代理链接'
 
-                // 自动滚动到结果
-                resultBox.scrollIntoView({ behavior: 'smooth' })
             } catch (error) {
-                alert(`错误: ${error.message}`)
+                alert('生成失败，请重试')
                 loading.style.display = 'none'
+                submitBtn.disabled = false
+                submitBtn.textContent = '生成代理链接'
             }
         })
 
         function copyLink() {
-            navigator.clipboard.writeText(resultLink.textContent)
-                .then(() => {
-                    const btn = document.querySelector('.copy-btn')
-                    btn.innerHTML = '<i class="fas fa-check"></i> 已复制!'
-                    setTimeout(() => {
-                        btn.innerHTML = '<i class="far fa-copy"></i> 复制'
-                    }, 2000)
-                })
-                .catch(err => {
-                    alert('复制失败，请手动选择文本')
-                })
+            const text = resultLink.textContent
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        const btn = document.querySelector('.copy-btn')
+                        const originalText = btn.textContent
+                        btn.textContent = '已复制'
+                        setTimeout(() => {
+                            btn.textContent = originalText
+                        }, 2000)
+                    })
+                    .catch(() => {
+                        fallbackCopy(text)
+                    })
+            } else {
+                fallbackCopy(text)
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea')
+            textArea.value = text
+            document.body.appendChild(textArea)
+            textArea.select()
+            try {
+                document.execCommand('copy')
+                alert('链接已复制到剪贴板')
+            } catch (err) {
+                alert('复制失败，请手动选择文本')
+            }
+            document.body.removeChild(textArea)
         }
     </script>
 </body>
