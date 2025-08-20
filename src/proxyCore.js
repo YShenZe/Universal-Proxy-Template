@@ -427,7 +427,7 @@ module.exports.handler = async (event) => {
       try {
         // 解码内容进行重写
         const textContent = new TextDecoder('utf-8').decode(buffer);
-        const proxyBase = `/.netlify/functions/proxy/`;
+        const proxyBase = `/proxy/`;
         
         let rewrittenContent;
         if (HTML_CONTENT_TYPES.some(type => contentType.toLowerCase().includes(type.toLowerCase()))) {
