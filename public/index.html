@@ -268,7 +268,7 @@
 
                 // 构造代理URL
                 const encoded = encodeURIComponent(url)
-                const proxyUrl = `${window.location.origin}/.netlify/functions/proxy/${encoded}`
+                const proxyUrl = `${window.location.origin}/proxy/${encoded}`
 
                 // 显示结果
                 resultLink.textContent = proxyUrl
