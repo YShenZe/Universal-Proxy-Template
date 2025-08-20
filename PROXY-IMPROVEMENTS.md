@@ -8,6 +8,13 @@
 - **端口验证**: 检查端口范围的有效性
 - **请求头过滤**: 更完善的请求头白名单和黑名单机制
 
+### 1.5. 资源重写功能
+- **HTML内容重写**: 自动重写HTML中的资源链接（CSS、JS、图片、表单、链接）
+- **CSS内容重写**: 重写CSS中的url()引用和@import语句
+- **Base标签注入**: 自动添加<base>标签，确保相对路径正确解析
+- **智能路径解析**: 支持相对路径、绝对路径和根相对路径的正确转换
+- **URL编码处理**: 正确处理特殊字符和中文URL
+
 ### 2. 稳定性提升
 - **导入优化**: 修复了node-fetch的导入问题，支持Node.js 18+的原生fetch
 - **超时控制**: 添加30秒请求超时机制
@@ -54,13 +61,25 @@
 
 ### 基本用法
 ```
-GET /.netlify/functions/proxy/https://api.example.com/data
+https://your-site.netlify.app/.netlify/functions/proxy/https://example.com
 ```
 
-### 带参数的请求
+### 带查询参数
 ```
-GET /.netlify/functions/proxy/https://api.example.com/search?q=test
+https://your-site.netlify.app/.netlify/functions/proxy/https://api.example.com/data?param=value
 ```
+
+### 资源重写功能
+代理现在会自动重写HTML和CSS内容中的资源链接：
+
+**HTML重写示例**:
+- `<link rel="stylesheet" href="style.css">` → `<link rel="stylesheet" href="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fstyle.css">`
+- `<script src="/js/app.js"></script>` → `<script src="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fjs%2Fapp.js"></script>`
+- `<img src="image.jpg">` → `<img src="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fimage.jpg">`
+
+**CSS重写示例**:
+- `background: url('bg.jpg')` → `background: url('/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fbg.jpg')`
+- `@import url('/fonts.css')` → `@import url('/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Ffonts.css')`
 
 ### POST请求
 ```
