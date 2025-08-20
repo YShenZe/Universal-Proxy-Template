@@ -264,6 +264,118 @@ function rewriteHtmlContent(html, originalUrl, proxyBase) {
         return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
       }
       return match;
+    })
+    // 重写 <video> 标签的 src 属性
+    .replace(/(<video[^>]+src=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <video> 标签的 poster 属性
+    .replace(/(<video[^>]+poster=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <audio> 标签的 src 属性
+    .replace(/(<audio[^>]+src=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <source> 标签的 src 属性
+    .replace(/(<source[^>]+src=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <track> 标签的 src 属性
+    .replace(/(<track[^>]+src=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <iframe> 标签的 src 属性
+    .replace(/(<iframe[^>]+src=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <embed> 标签的 src 属性
+    .replace(/(<embed[^>]+src=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
+    })
+    // 重写 <object> 标签的 data 属性
+    .replace(/(<object[^>]+data=["']?)([^"'\s>]+)(["']?[^>]*>)/gi, (match, prefix, url, suffix) => {
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+        const absoluteUrl = url.startsWith('//') ? `https:${url}` : url;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (url.startsWith('/')) {
+        const absoluteUrl = `${baseUrl}${url}`;
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      } else if (!url.startsWith('#') && !url.startsWith('data:') && !url.startsWith('javascript:')) {
+        const absoluteUrl = resolveUrl(`${baseUrl}${directoryPath}`, url);
+        return `${prefix}${toProxyUrl(absoluteUrl, proxyBase)}${suffix}`;
+      }
+      return match;
     });
 
   // 添加 base 标签来帮助处理相对路径
@@ -295,6 +407,10 @@ function rewriteCssContent(css, originalUrl, proxyBase) {
     return match;
   });
 }
+
+// 导出重写函数供测试使用
+module.exports.rewriteHtmlContent = rewriteHtmlContent;
+module.exports.rewriteCssContent = rewriteCssContent;
 
 module.exports.handler = async (event) => {
   const startTime = Date.now();

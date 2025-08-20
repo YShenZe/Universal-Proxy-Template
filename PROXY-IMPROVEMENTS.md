@@ -11,6 +11,7 @@
 ### 1.5. 资源重写功能
 - **HTML内容重写**: 自动重写HTML中的资源链接（CSS、JS、图片、表单、链接）
 - **CSS内容重写**: 重写CSS中的url()引用和@import语句
+- **媒体资源支持**: 完整支持视频、音频等媒体资源代理
 - **Base标签注入**: 自动添加<base>标签，确保相对路径正确解析
 - **智能路径解析**: 支持相对路径、绝对路径和根相对路径的正确转换
 - **URL编码处理**: 正确处理特殊字符和中文URL
@@ -72,10 +73,26 @@ https://your-site.netlify.app/.netlify/functions/proxy/https://api.example.com/d
 ### 资源重写功能
 代理现在会自动重写HTML和CSS内容中的资源链接：
 
+#### 支持的HTML标签
+- `<link>` - CSS文件和其他资源
+- `<script>` - JavaScript文件
+- `<img>` - 图片资源
+- `<a>` - 链接
+- `<form>` - 表单提交地址
+- `<video>` - 视频文件（src和poster属性）
+- `<audio>` - 音频文件
+- `<source>` - 媒体源文件
+- `<track>` - 字幕轨道文件
+- `<iframe>` - 嵌入式框架
+- `<embed>` - 嵌入式对象
+- `<object>` - 对象数据
+
 **HTML重写示例**:
 - `<link rel="stylesheet" href="style.css">` → `<link rel="stylesheet" href="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fstyle.css">`
 - `<script src="/js/app.js"></script>` → `<script src="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fjs%2Fapp.js"></script>`
 - `<img src="image.jpg">` → `<img src="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fimage.jpg">`
+- `<video src="video.mp4" poster="thumb.jpg">` → `<video src="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fvideo.mp4" poster="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fthumb.jpg">`
+- `<audio src="music.mp3">` → `<audio src="/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fmusic.mp3">`
 
 **CSS重写示例**:
 - `background: url('bg.jpg')` → `background: url('/.netlify/functions/proxy/https%3A%2F%2Fexample.com%2Fbg.jpg')`
